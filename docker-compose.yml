@@ -1,0 +1,17 @@
+version: "3"
+
+services:
+
+  api-test:
+    container_name: api-test
+    image: hyperf/hyperf:7.4-alpine-v3.11-swoole-v4.5.11
+    volumes:
+      - ./:/hyperf/:rw
+    ports:
+      - "19501:19501"
+    entrypoint: [ "/hyperf/entrypoint.sh", "start" ]
+    environment:
+      - TZ=Asia/Shanghai
+      - ENV_FILE=test
+    restart: "on-failure:3"
+    network_mode: "bridge"
